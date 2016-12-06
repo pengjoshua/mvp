@@ -60,14 +60,21 @@
         <th>Is valid?</th>
         <th>Points</th>
         <th>Score</th>
+        <th>id</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="word in wordlist.slice().reverse() track by $index">
-        <td>{{word.word}}</td>
-        <td>{{word.valid}}</td>
-        <td>{{word.points}}</td>
-        <td>{{word.score}}</td>
+      <tr ng-repeat="w in list.slice().reverse() track by $index">
+        <td>{{w.word}}</td>
+        <td>{{w.valid}}</td>
+        <td>{{w.points}}</td>
+        <td>{{w.score}}</td>
+        <td>{{w._id}}</td>
+        <td><button class="btn btn-primary" ng-click="add()">Add</button>
+<!--             <button class="btn btn-info" ng-click="update()">Update</button>
+            <button class="btn btn-secondary" ng-click="deselect()">Clear</button>     -->
+            <button class="btn btn-danger" ng-click="remove(w._id)">Remove</button>
+<!--             <button class="btn btn-warning" ng-click="edit(word._id)">Edit</button></td>  -->
     </tbody>
   </table>
 </div>
