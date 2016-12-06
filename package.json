@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/pengjoshua/hrsf51-mvp#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "underscore": "^1.8.3",
+    "word-list-json": "^0.2.0"
   }
 }

@@ -11,9 +11,11 @@
 </head>
 <body>
 
-<div class="container" ng-controller="AppController">
+<div class="container" ng-controller="AppCtrl">
   <h1>Boggle</h1>
-  <input ng-model="test">{{test}}
+  <form ng-submit="checkWord(word)">
+    <input ng-model="test"><br>{{test}}<br>
+  </form>
   <table class="table">
     <thead>
       <tr>

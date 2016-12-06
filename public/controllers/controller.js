@@ -1,27 +1,38 @@
 var myApp = angular.module('myApp', []);
 
-myApp.controller('AppController', ['$scope', '$http', function($scope, $http) {
+myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   console.log("hello from controller");
 
-  word1 = {
-    word: 'chicken',
-    valid: true,
-    points: 4,
-    score: 4
+  var refresh = function() {
+    $http.get('/wordlist').then(function(response) {
+      console.log('I got the data I requested');
+      $scope.wordlist = response.data;
+    });
   };
-  word2 = {
-    word: 'steak',
-    valid: false,
-    points: 2,
-    score: 2
+  refresh();
+
+  var generateBoard = function(num) {
+    num = 4; // default setting
+    var allLetters = 'abcdefghijklmnopqrstuvwxyz';
+    var letters = {};
+    var randomIndex = Math.floor(Math.random() * allLetters.length);
+
   };
-  word3 = {
-    word: 'pork',
-    valid: true,
-    points: 1,
-    score: 1
+
+  var inDictionary = function(word) {
+    return $http.get('words.json').then(function(response) {
+      $scope.dictionary = response.data;
+      console.log($scope.dictionary.words.length);
+      if ($scope.dictionary.words.indexOf(word) !== -1) {
+        return true;
+      }
+    });
   };
-  var wordlist = [word1, word2, word3];
-  $scope.wordlist = wordlist;
+
+  var inBoard = function(word) {
+    if ()
+  }
+
+  inDictionary();
 
 }]);
