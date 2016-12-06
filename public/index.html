@@ -1,21 +1,57 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+<link rel="stylesheet" type="text/css" href="styles.css">
+
 <title>Boggle!</title>
 </head>
 <body>
 
 <div class="container" ng-controller="AppCtrl">
-  <h1>Boggle</h1>
-  <form ng-submit="checkWord(word)">
-    <input ng-model="test"><br>{{test}}<br>
-  </form>
+  <div class="title"><h1>Boggle</h1></div>
+  <table class="grid">
+    <tbody>
+      <tr>
+        <td>{{grid[0]}}</td>
+        <td>{{grid[1]}}</td>
+        <td>{{grid[2]}}</td>
+        <td>{{grid[3]}}</td>
+      </tr>
+      <tr>
+        <td>{{grid[4]}}</td>
+        <td>{{grid[5]}}</td>
+        <td>{{grid[6]}}</td>
+        <td>{{grid[7]}}</td>
+      </tr>
+      <tr>
+        <td>{{grid[8]}}</td>
+        <td>{{grid[9]}}</td>
+        <td>{{grid[10]}}</td>
+        <td>{{grid[11]}}</td>
+      </tr>
+      <tr>
+        <td>{{grid[12]}}</td>
+        <td>{{grid[13]}}</td>
+        <td>{{grid[14]}}</td>
+        <td>{{grid[15]}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="string"><h2>{{grid.join(' ')}}</h2></div>
+  <div class="typing">
+    <form ng-submit="submit()">
+      <input type="text" ng-model="text.word" name="text" />
+      <input type="submit" id="submit" value="Submit" />
+      <h3>{{text}}</h3>
+    </form>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -37,5 +73,6 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
   <script src="controllers/controller.js"></script>
+
 </body>
 </html>
