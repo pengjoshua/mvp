@@ -1,30 +1,49 @@
+// var Promises = require('bluebird');
+
 var myApp = angular.module('myApp', []);
 
 myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   console.log("hello from controller");
   var progress = '';
-  $scope.list = [];
+  $scope.wordlist = [];
+  $scope.score = 0;
 
-  $scope.$watch("text.word", function (newVal, oldVal) {
-    console.log("oldVal:", oldVal);
-    console.log("newVal:", newVal);
-    $scope.newVal = newVal;
-    if (newVal !== undefined) {
-      var curr = newVal.charAt(newVal.length - 1);
-      if (xOnGrid(curr) > 0) {
-        progress = progress.concat(curr);
-        console.log('progress', progress);
-      }
-      console.log('oldVal', oldVal, 'newVal', newVal, 'curr', curr);
-    } 
+  $scope.$watch("text.input", function (newVal, oldVal) {
+    // console.log("oldVal:", oldVal);
+    // console.log("newVal:", newVal);
+    // $scope.newVal = newVal;
+    // if (newVal !== undefined) {
+    //   var curr = newVal.charAt(newVal.length - 1);
+    //   if (xOnGrid(curr) > 0) {
+    //     progress = progress.concat(curr);
+    //     console.log('progress', progress);
+    //   }
+    //   console.log('oldVal', oldVal, 'newVal', newVal, 'curr', curr);
+    // } 
   });
-
+  $scope.text = {
+    valid: null
+  };
   $scope.submit = function() {
+    $scope.text.score = $scope.text.score || 0;
+    $scope.text.score += $scope.score;
+    $scope.text.word = $scope.text.input;
     if ($scope.text.word) {
-      $scope.text.points = $scope.text.word.length = 3;
-      $scope.list.push(this.text.word);
-      console.log('list list list list list', $scope.list);
-      $scope.text.word = '';
+      inDictionary($scope.text.input, function(valid) {
+        $scope.text.valid = valid;
+        if (!valid) {
+          $scope.text.points = 0;
+        } else if ($scope.text.word.length < 5) {
+          $scope.text.points = 1;
+        } else {
+          $scope.text.points = $scope.text.word.length - 3;
+        }
+        $scope.text.score += $scope.text.points;
+        $scope.wordlist.push(JSON.parse(JSON.stringify($scope.text)));
+        console.log('word', $scope.text.word, 'valid', $scope.text.valid, 'points', $scope.text.points, 'score', $scope.text.score);
+        console.dir($scope.wordlist);
+        $scope.text.input = '';
+      });
     }
   };
 
@@ -75,12 +94,15 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
     return grid;
   };
 
-  var inDictionary = function(word) {
-    return $http.get('words.json').then(function(response) {
+  var inDictionary = function(word, cb) {
+    console.log('word', word);
+    $http.get('words.json').then(function(response) {
       $scope.dictionary = response.data;
       console.log($scope.dictionary.words.length);
-      if (_.contains($scope.dictionary.words, word)) {
-        return true;
+      if ($scope.dictionary.words.indexOf(word) !== -1) {
+        cb(true);
+      } else {
+        cb(false);
       }
     });
   };
@@ -107,13 +129,11 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
     // return _.contains($scope.grid, letter.toUpperCase()); 
   };
 
-  var validLetter = function(letter) {
-
-  }
+  // var validLetter = function(letter) {
+  // };
 
   // var nonRepeat = function(letter) {
-  //   if ()
-  // }
+  // };
 
   inDictionary();
   generateGrid();

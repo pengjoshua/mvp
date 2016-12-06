@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <link rel="stylesheet" type="text/css" href="styles.css">
+<script src="https://cdn.jsdelivr.net/bluebird/latest/bluebird.min.js"></script>
 
 <title>Boggle!</title>
 </head>
@@ -47,9 +48,9 @@
   <div class="string"><h2>{{grid.join(' ')}}</h2></div>
   <div class="typing">
     <form ng-submit="submit()">
-      <input type="text" ng-model="text.word" name="text" />
-      <input type="submit" id="submit" value="Submit" />
-      <h3>{{text}}</h3>
+      <input type="text" ng-model="text.input" name="text" />
+      <input type="submit" id="submit" value="submit" />
+      <h3>{{text.word}}</h3>
     </form>
   </div>
   <table class="table">
@@ -62,7 +63,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="word in wordlist">
+      <tr ng-repeat="word in wordlist.slice().reverse() track by $index">
         <td>{{word.word}}</td>
         <td>{{word.valid}}</td>
         <td>{{word.points}}</td>
