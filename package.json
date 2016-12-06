@@ -1,0 +1,24 @@
+{
+  "name": "hrsf51-mvp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pengjoshua/hrsf51-mvp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pengjoshua/hrsf51-mvp/issues"
+  },
+  "homepage": "https://github.com/pengjoshua/hrsf51-mvp#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

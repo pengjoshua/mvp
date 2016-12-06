@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<title>Boggle!</title>
+</head>
+<body>
+
+<div class="container" ng-controller="AppController">
+  <h1>Boggle</h1>
+  <input ng-model="test">{{test}}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Is valid?</th>
+        <th>Points</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="word in wordlist">
+        <td>{{word.word}}</td>
+        <td>{{word.valid}}</td>
+        <td>{{word.points}}</td>
+        <td>{{word.score}}</td>
+    </tbody>
+  </table>
+</div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
+  <script src="controllers/controller.js"></script>
+</body>
+</html>

@@ -42,3 +42,49 @@ Once the project moves into development, the press release can be used as a touc
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+
+.................................................................................................
+
+Food Voting App
+
+This app is to help Hack Reactor students who want to get a meal together to select a food type and restaurant to go to within walking distance. 
+
+The homepage will have an entry form to place your name, the food you are interested in, and a restaurant (optional) you are interested in. 
+
+You can edit/modify, add, and delete existing entries and "vote" for an entry. 
+
+The app will utilize the entry with the most votes and use the yelp api to randomly pick 1 of the 5 closest restaurants with the highest ratings that serve that type of food.
+
+Finally, the app will use the google maps api to display a map with the walking route to that selected restaurant.
+
+Plan:
+Utilize general buildout of todo list code I've already written and modify it for food voting
+
+.................................................................................................
+
+Boggle
+
+This app will generate an n x n board of random lowercase letters
+
+As in Boggle, the goal is find as many actual English dictionary words in the board.
+
+Restrictions: 
+  string of letters of length >= 3
+  adjacent letters
+  can't use a letter that you have used before (can use repeated letters)
+
+The app will use the mw dictionary api to check strings to see if they are actual words in the English dictionary
+
+Plan:
+Start with 4x4 board of 16 letters = array of 16 letters
+do get and post requests of strings formed from any combination of letters (not abiding by the restrictions) to check if they are actual words
+Add restrictions one by one, may need to change to object
+If I get this far, scramble letters every 10 seconds
+
+
+
+
+
+
+
+
