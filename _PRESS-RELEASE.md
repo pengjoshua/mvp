@@ -58,11 +58,19 @@ The app will utilize the entry with the most votes and use the yelp api to rando
 Finally, the app will use the google maps api to display a map with the walking route to that selected restaurant.
 
 Plan:
-Utilize general buildout of todo list code I've already written and modify it for food voting
+Utilize general buildout of todo list code I've partly put together and modify it for food voting
+
+Update:
+I watched and followed a tutorial series on building a simple todo list app with the MEAN stack on the 'Learn Coding Tutorials' (by Michael Cheng) YouTube channel.
+After building the todo list app, I thought about refactoring it to a food voting app but decided to leave the todo list app in it's finished state and try the Boggle project instead as it seemed to be a more interesting and fun idea. I've posted the todo list app in the folder, but I do not take credit for the original creation of the code. 
+
+Capabilities:
+Add/Remove/Edit/Update todo entries
+connects with mongodb database and added entries persist when page refreshes
 
 .................................................................................................
 
-Boggle
+Boggle Easy Mode
 
 This app will generate an n x n board of random lowercase letters
 
@@ -70,16 +78,26 @@ As in Boggle, the goal is find as many actual English dictionary words in the bo
 
 Restrictions: 
   string of letters of length >= 3
-  adjacent letters
+  adjacent letters (todo for later, a bit to complicated to implement for mvp)
   can't use a letter that you have used before (can use repeated letters)
 
 The app will use the mw dictionary api to check strings to see if they are actual words in the English dictionary
 
 Plan:
 Start with 4x4 board of 16 letters = array of 16 letters
-do get and post requests of strings formed from any combination of letters (not abiding by the restrictions) to check if they are actual words
-Add restrictions one by one, may need to change to object
+Check if words are valid: formed from combination of letters, have not already been submitted (unique, non-repeats), are actual words in the English dictionary (download an English dictionary json file or use a dictionary API)
+Add restrictions one by one, as I have time
 If I get this far, scramble letters every 10 seconds
+
+Update:
+I built the todo list app on the first day but scrapped it at the end of the first day.
+I started the Boggle project basically at the start of the second day of the MVP sprint. In one day, I actually accomplished all of my primary goals and fulfilled all of my personal requirements for it to be minimally viable.
+
+Capabilities:
+Checks if words are valid, did not implement the adjacent letter blocks rule
+Calculates points based on word length and keeps a cumulative point score.
+Angular's two way binding feature highlights the text in red the user is typing if the words are not valid
+Words can be added and removed from a mongodb database. Added words persist when page is refreshed.
 
 
 
