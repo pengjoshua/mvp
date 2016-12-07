@@ -42,7 +42,6 @@ app.get('/wordlist', function(req, res) {
 app.post('/wordlist', function(req, res) {
   console.log(req.body);
   db.wordlist.insert(req.body, function(err, doc) {
-    console.log('doc----------', doc)
     res.json(doc);
   });
 });

@@ -49,9 +49,9 @@
     <h1>{{grid.join(' ')}}</h1>
   </div>
   <div class="typing">
-    <form ng-submit="submit()">
-      <input type="text" ng-model="text.input" name="text" />
-      <input type="submit" id="submit" value="submit" />
+    <form autocomplete="off" ng-submit="submit()">
+      <input class="form-control" type="text" ng-model="text.input" name="text" />
+      <input class="form-control" type="submit" id="submit" value="submit" />
       <div ng-class='{red : highlight, black: !highlight}'><h3>{{text.input}}</h3></div>
     </form>
   </div>

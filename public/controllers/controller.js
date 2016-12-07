@@ -4,7 +4,7 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   
   var initialize = function() {
     $http.get('/wordlist').then(function(response) {
-      console.log('I got the data I requested');
+      // console.log('I got the data I requested');
       $scope.list = response.data;
       if ($scope.list.length > 0) {
         for (var i = 0; i < $scope.list.length; i++) {
