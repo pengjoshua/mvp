@@ -52,14 +52,14 @@
     <form ng-submit="submit()">
       <input type="text" ng-model="text.input" name="text" />
       <input type="submit" id="submit" value="submit" />
-      <h3>{{text.word}}</h3>
+      <div ng-class='{red : highlight, black: !highlight}'><h3>{{text.input}}</h3></div>
     </form>
   </div>
   <table class="table">
     <thead>
       <tr>
         <th>Word</th>
-        <th>Is valid?</th>
+        <th>Valid?</th>
         <th>Points</th>
         <th>Score</th>
         <th>Action</th>

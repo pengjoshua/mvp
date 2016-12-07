@@ -1,5 +1,3 @@
-// var Promises = require('bluebird');
-
 var myApp = angular.module('myApp', []);
 
 myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
@@ -19,8 +17,23 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   var progress = '';
   $scope.list = initialize() || [];;
   $scope.score = 0;
+  $scope.highlight = false;
 
   $scope.$watch("text.input", function (newVal, oldVal) {
+    inDictionary(newVal, function(valid) {
+      var repeatedWord = false;
+      for (var i = 0; i < $scope.list.length; i++) {
+        if ($scope.list[i].word === newVal) {
+          repeatedWord = true;
+        }
+      }
+      if (!valid || !onGrid($scope.text.word) || repeatedWord) {
+        $scope.highlight = true;
+      } else {
+        $scope.highlight = false;
+      }
+    });
+    // console.log('highlight', $scope.highlight);
     // console.log("oldVal:", oldVal);
     // console.log("newVal:", newVal);
     // $scope.newVal = newVal;
@@ -122,12 +135,10 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
     console.log($scope.single._id);
     $http.put('/wordlist/' + $scope.single._id, $scope.single).then(function(response) {
       refresh();
-      // $scope.word = '';
     });
   };
 
   $scope.deselect = function() {
-    // $scope.word = '';
   }
 
   var generateGrid = function() {
@@ -194,7 +205,7 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
     return true;
   }
 
-  var xOnGrid = function(letter) {
+  var timesOnGrid = function(letter) {
     var matches = [];
     var letterIds = [];
     console.log('inGrid: grid', $scope.grid, 'letter', letter.toUpperCase());

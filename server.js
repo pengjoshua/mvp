@@ -8,7 +8,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
 app.get('/wordlist', function(req, res) {
-  console.log('I received a GET request');
+  // console.log('I received a GET request');
 
   db.wordlist.find(function(err, docs) {
     console.log(docs);
