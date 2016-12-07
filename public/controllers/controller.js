@@ -27,16 +27,24 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
     valid: null,
     points: 0,
     score: 0,
+    added: false
   };
 
   $scope.submit = function() {
     $scope.text.score = $scope.text.score || 0;
     $scope.text.score += $scope.score;
     $scope.text.word = $scope.text.input;
+    
     if ($scope.text.word) {
       inDictionary($scope.text.word, function(valid) {
         $scope.text.valid = valid;
-        if (!valid || !onGrid($scope.text.word)) {
+        var repeatedWord = false;
+        for (var i = 0; i < $scope.list.length; i++) {
+          if ($scope.list[i].word === $scope.text.word) {
+            repeatedWord = true;
+          }
+        }
+        if (!valid || !onGrid($scope.text.word) || repeatedWord) {
           $scope.text.valid = false;
           $scope.text.points = 0;
         } else if ($scope.text.word.length < 5) {
@@ -49,7 +57,6 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.single.added = false;
         $scope.list.push($scope.single);
         // console.log('word', $scope.text.word, 'valid', $scope.text.valid, 'points', $scope.text.points, 'score', $scope.text.score);
-        console.dir('$scope.list ----------', $scope.list);
         $scope.text.input = '';
       });
     }
@@ -64,8 +71,6 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   refresh();
 
   $scope.add = function() {
-    console.log('thisthisthisthis', this);
-    console.log('scope.single------', $scope.single, 'this.w-------', this.w);
     if (!$scope.single) {
       return null;
     }
@@ -74,6 +79,7 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
       for (var i = 0; i < $scope.list.length; i++) {
         if (response.data.word === $scope.list[i].word) {
           $scope.list[i]._id = response.data._id;
+          $scope.list[i].added = true;
         }
       }
       refresh();
@@ -151,10 +157,8 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   generateGrid();
 
   var inDictionary = function(word, cb) {
-    // console.log('word', word);
     $http.get('words.json').then(function(response) {
       $scope.dictionary = response.data;
-      // console.log($scope.dictionary.words.length);
       if ($scope.dictionary.words.indexOf(word) !== -1) {
         cb(true);
       } else {
@@ -164,13 +168,17 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   };
 
   var onGrid = function(word) {
-    var common = _.intersection(word.toUpperCase().split(''), $scope.grid).join('');
-    // console.log('onGrid word', word.toUpperCase(), 'common', common);
-    if (common === word.toUpperCase()) {
-      return true;
-    } else {
-      return false;
+    var wordCaps = word.toUpperCase();
+    var gridCopy = $scope.grid;
+    for (var i = 0; i < wordCaps; i++) {
+      var gridIndex = gridCopy.indexOf(wordCaps[i]);
+      if (gridIndex !== -1) {
+        gridCopy.splice(gridIndex, 1);
+      } else {
+        return false;
+      }
     }
+    return true;
   }
 
   var xOnGrid = function(letter) {
@@ -199,8 +207,6 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   // };
 
   // var nonRepeat = function(letter) {
-  // };
-
-  
+  // }; 
 
 }]);

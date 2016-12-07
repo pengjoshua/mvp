@@ -8,10 +8,6 @@
   margin: 0 auto;
 }
 
-/*td {
-  padding: 10px;
-}*/
-
 .string {
   margin: 0 auto;
   text-align: center;
@@ -24,8 +20,8 @@
 
 .grid td {
     position:relative;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 14px;
+    padding-right: 14px;
     outline:1px solid #ccc;
     text-align: center;
 }
