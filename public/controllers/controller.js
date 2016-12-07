@@ -3,9 +3,21 @@
 var myApp = angular.module('myApp', []);
 
 myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
-  // console.log("hello from controller");
+  
+  var initialize = function() {
+    $http.get('/wordlist').then(function(response) {
+      console.log('I got the data I requested');
+      $scope.list = response.data;
+      if ($scope.list.length > 0) {
+        for (var i = 0; i < $scope.list.length; i++) {
+          $scope.list[i].added = true;
+        }
+      }
+    });
+  };
+
   var progress = '';
-  $scope.list = [];
+  $scope.list = initialize() || [];;
   $scope.score = 0;
 
   $scope.$watch("text.input", function (newVal, oldVal) {
@@ -65,7 +77,7 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   var refresh = function() {
     $http.get('/wordlist').then(function(response) {
       console.log('I got the data I requested');
-      $scope.wordlist = response.data;
+      return response.data;
     });
   };
   refresh();

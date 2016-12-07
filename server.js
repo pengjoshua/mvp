@@ -49,7 +49,6 @@ app.post('/wordlist', function(req, res) {
 
 app.delete('/wordlist/:id', function(req, res) {
   var id = req.params.id;
-  console.log('deletedeletedelete', id);
   console.log(id);
   db.wordlist.remove({_id: mongojs.ObjectId(id)}, function(err, doc) {
     res.json(doc);
