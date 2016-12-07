@@ -168,9 +168,10 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   };
 
   var onGrid = function(word) {
+    console.log(word);
     var wordCaps = word.toUpperCase();
-    var gridCopy = $scope.grid;
-    for (var i = 0; i < wordCaps; i++) {
+    var gridCopy = $scope.grid.slice();
+    for (var i = 0; i < wordCaps.length; i++) {
       var gridIndex = gridCopy.indexOf(wordCaps[i]);
       if (gridIndex !== -1) {
         gridCopy.splice(gridIndex, 1);
