@@ -1,10 +1,9 @@
 var myApp = angular.module('myApp', []);
 
 myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
-  
+
   var initialize = function() {
     $http.get('/wordlist').then(function(response) {
-      // console.log('I got the data I requested');
       $scope.list = response.data;
       if ($scope.list.length > 0) {
         for (var i = 0; i < $scope.list.length; i++) {
@@ -17,7 +16,8 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   var progress = '';
   $scope.list = initialize() || [];;
   $scope.score = 0;
-  $scope.highlight = false;
+  $scope.highlight = true;
+  $scope.letterInput = {};
 
   $scope.$watch("text.input", function (newVal, oldVal) {
     inDictionary(newVal, function(valid) {
@@ -33,18 +33,29 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
         $scope.highlight = false;
       }
     });
-    // console.log('highlight', $scope.highlight);
-    // console.log("oldVal:", oldVal);
-    // console.log("newVal:", newVal);
-    // $scope.newVal = newVal;
-    // if (newVal !== undefined) {
-    //   var curr = newVal.charAt(newVal.length - 1);
-    //   if (xOnGrid(curr) > 0) {
-    //     progress = progress.concat(curr);
-    //     console.log('progress', progress);
-    //   }
-    //   console.log('oldVal', oldVal, 'newVal', newVal, 'curr', curr);
-    // } 
+    console.log('highlight', $scope.highlight);
+    console.log("oldVal:", oldVal);
+    console.log("newVal:", newVal);
+    $scope.newVal = newVal;
+    if (newVal !== undefined) {
+      var curr = newVal.charAt(newVal.length - 1);
+      if (timesOnGrid(curr) > 0) {
+        progress = progress.concat(curr);
+        console.log('progress', progress);
+        _.each($scope.letterIds, (id) => {
+          console.log('curr', curr);
+          $scope.letterInput[id] = $scope.letterInput[id] || {};
+          $scope.letterInput[id].current = false;
+          $scope.letterInput[id].prevSelected = true;
+          if ($scope.letters[id] === curr) {
+            $scope.letterInput[id].current = true;
+            $scope.letterInput[id].prevSelected = false;
+          }
+        });
+      }
+      console.log('$scope.letterInput', $scope.letterInput);
+      // console.log('oldVal', oldVal, 'newVal', newVal, 'curr', curr);
+    }
   });
 
   $scope.text = {
@@ -59,7 +70,7 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.text.score = $scope.text.score || 0;
     $scope.text.score += $scope.score;
     $scope.text.word = $scope.text.input;
-    
+
     if ($scope.text.word) {
       inDictionary($scope.text.word, function(valid) {
         $scope.text.valid = valid;
@@ -112,13 +123,13 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   };
 
   $scope.remove = function(id) {
-    $http.delete('/wordlist/' + id).then(function(response) {  
-      console.log('delete response.data', response.data);  
+    $http.delete('/wordlist/' + id).then(function(response) {
+      console.log('delete response.data', response.data);
       for (var i = 0; i < $scope.list.length; i++) {
         if ($scope.list[i]._id === id) {
           $scope.list.splice(i, 1);
         }
-      } 
+      }
       console.log('$scope.list', $scope.list);
       refresh();
     });
@@ -166,13 +177,13 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
 
     _.each(cubes, function(cube, index) {
       var randomSide = Math.floor(Math.random() * cube.length);
-      var randomLetter = cube[randomSide];
+      var randomLetter = cube[randomSide].toLowerCase();
       letters[index] = randomLetter;
       grid.push(randomLetter);
     });
 
-    // console.log('grid', grid);
-    // console.log('letters', letters);
+    console.log('grid', grid);
+    console.log('letters', letters);
     $scope.grid = grid;
     $scope.letters = letters;
     return grid;
@@ -192,7 +203,7 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
 
   var onGrid = function(word) {
     console.log(word);
-    var wordCaps = word.toUpperCase();
+    var wordCaps = word.toLowerCase();
     var gridCopy = $scope.grid.slice();
     for (var i = 0; i < wordCaps.length; i++) {
       var gridIndex = gridCopy.indexOf(wordCaps[i]);
@@ -208,8 +219,8 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
   var timesOnGrid = function(letter) {
     var matches = [];
     var letterIds = [];
-    console.log('inGrid: grid', $scope.grid, 'letter', letter.toUpperCase());
-    var letterCaps = letter.toUpperCase();
+    console.log('timesOnGrid: grid', $scope.grid, 'letter', letter.toLowerCase());
+    var letterCaps = letter.toLowerCase();
     for (var id in $scope.letters) {
       if ($scope.letters[id] === letterCaps) {
         matches.push(letterCaps);
@@ -224,13 +235,13 @@ myApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http) {
     //   if (letterIds[i])
     // }
     return matches.length;
-    // return _.contains($scope.grid, letter.toUpperCase()); 
+    // return _.contains($scope.grid, letter.toLowerCase());
   };
 
   // var validLetter = function(letter) {
   // };
 
   // var nonRepeat = function(letter) {
-  // }; 
+  // };
 
 }]);

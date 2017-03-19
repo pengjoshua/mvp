@@ -68,10 +68,10 @@ app.put('/wordlist/:id', function(req, res) {
   db.wordlist.findAndModify(
   {
     query: {_id: mongojs.ObjectId(id)},
-    update: {$set: 
+    update: {$set:
       {
-        word: req.body.word, 
-        valid: req.body.valid, 
+        word: req.body.word,
+        valid: req.body.valid,
         points: req.body.points,
         score: req.body.score
       }},
@@ -81,5 +81,5 @@ app.put('/wordlist/:id', function(req, res) {
   });
 });
 
-app.listen(8081);
-console.log('Server running on port 8081');
+app.listen(8082);
+console.log('Server running on port 8082');

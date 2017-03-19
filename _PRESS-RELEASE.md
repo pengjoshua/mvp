@@ -1,6 +1,6 @@
 # Project Name #
 
-<!-- 
+<!--
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
 
 There is an approach called "working backwards" that is widely used at Amazon. They work backwards from the customer, rather than starting with an idea for a product and trying to bolt customers onto it. While working backwards can be applied to any specific product decision, using this approach is especially important when developing new products or features.
@@ -9,13 +9,13 @@ For new initiatives a product manager typically starts by writing an internal pr
 
 If the benefits listed don't sound very interesting or exciting to customers, then perhaps they're not (and shouldn't be built). Instead, the product manager should keep iterating on the press release until they've come up with benefits that actually sound like benefits. Iterating on a press release is a lot less expensive than iterating on the product itself (and quicker!).
 
-If the press release is more than a page and a half, it is probably too long. Keep it simple. 3-4 sentences for most paragraphs. Cut out the fat. Don't make it into a spec. You can accompany the press release with a FAQ that answers all of the other business or execution questions so the press release can stay focused on what the customer gets. My rule of thumb is that if the press release is hard to write, then the product is probably going to suck. Keep working at it until the outline for each paragraph flows. 
+If the press release is more than a page and a half, it is probably too long. Keep it simple. 3-4 sentences for most paragraphs. Cut out the fat. Don't make it into a spec. You can accompany the press release with a FAQ that answers all of the other business or execution questions so the press release can stay focused on what the customer gets. My rule of thumb is that if the press release is hard to write, then the product is probably going to suck. Keep working at it until the outline for each paragraph flows.
 
 Oh, and I also like to write press-releases in what I call "Oprah-speak" for mainstream consumer products. Imagine you're sitting on Oprah's couch and have just explained the product to her, and then you listen as she explains it to her audience. That's "Oprah-speak", not "Geek-speak".
 
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
- 
+
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
 
@@ -47,11 +47,11 @@ Once the project moves into development, the press release can be used as a touc
 
 Food Voting App
 
-This app is to help Hack Reactor students who want to get a meal together to select a food type and restaurant to go to within walking distance. 
+This app is to help Hack Reactor students who want to get a meal together to select a food type and restaurant to go to within walking distance.
 
-The homepage will have an entry form to place your name, the food you are interested in, and a restaurant (optional) you are interested in. 
+The homepage will have an entry form to place your name, the food you are interested in, and a restaurant (optional) you are interested in.
 
-You can edit/modify, add, and delete existing entries and "vote" for an entry. 
+You can edit/modify, add, and delete existing entries and vote for an entry.
 
 The app will utilize the entry with the most votes and use the yelp api to randomly pick 1 of the 5 closest restaurants with the highest ratings that serve that type of food.
 
@@ -60,23 +60,15 @@ Finally, the app will use the google maps api to display a map with the walking 
 Plan:
 Utilize general buildout of todo list code I've partly put together and modify it for food voting
 
-Update:
-I watched and followed a tutorial series on building a simple todo list app with the MEAN stack on the 'Learn Coding Tutorials' (by Michael Cheng) YouTube channel.
-After building the todo list app, I thought about refactoring it to a food voting app but decided to leave the todo list app in it's finished state and try the Boggle project instead as it seemed to be a more interesting and fun idea. I've posted the todo list app in the folder, but I do not take credit for the original creation of the code. 
-
-Capabilities:
-Add/Remove/Edit/Update todo entries
-connects with mongodb database and added entries persist when page refreshes
-
 .................................................................................................
 
-Boggle Easy Mode
+Boggle
 
 This app will generate an n x n board of random lowercase letters
 
 As in Boggle, the goal is find as many actual English dictionary words in the board.
 
-Restrictions: 
+Restrictions:
   string of letters of length >= 3
   adjacent letters (todo for later, a bit to complicated to implement for mvp)
   can't use a letter that you have used before (can use repeated letters)
@@ -98,11 +90,3 @@ Checks if words are valid, did not implement the adjacent letter blocks rule
 Calculates points based on word length and keeps a cumulative point score.
 Angular's two way binding feature highlights the text in red the user is typing if the words are not valid
 Words can be added and removed from a mongodb database. Added words persist when page is refreshed.
-
-
-
-
-
-
-
-
